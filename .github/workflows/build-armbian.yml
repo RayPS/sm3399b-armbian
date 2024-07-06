@@ -22,7 +22,7 @@ on:
       armbian_board:
         description: "Select device board."
         required: false
-        default: "all"
+        default: "sm3399b"
         type: choice
         options:
           - sm3399b
