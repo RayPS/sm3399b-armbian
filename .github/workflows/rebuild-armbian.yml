@@ -155,6 +155,7 @@ on:
           - xiaobao
           - zcube1-max
           - zysj
+          - sm3399b
       armbian_kernel:
         description: "Select kernel version."
         required: false
@@ -214,7 +215,7 @@ on:
         options:
           - ophub
           - angel
-          - yourname
+          - rayps
 
 env:
   TZ: America/New_York
@@ -301,14 +302,14 @@ jobs:
 
           mkdir -p /builder/build
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
-          ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
+          ln -sf /builder/build /home/runner/work/_actions/RayPS/sm3399b-armbian/main/build
 
           sudo timedatectl set-timezone "${TZ}"
           echo "build_tag=Armbian${set_release}_${{ inputs.armbian_storage }}_$(date +"%Y.%m")" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Rebuild Armbian
-        uses: ophub/amlogic-s9xxx-armbian@main
+        uses: RayPS/sm3399b-armbian@main
         if: ${{ env.ARMBIAN_URL }} != '' && !cancelled()
         with:
           build_target: armbian
