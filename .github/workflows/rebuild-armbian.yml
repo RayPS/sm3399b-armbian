@@ -16,10 +16,11 @@ on:
       armbian_board:
         description: "Select device board."
         required: false
-        default: "sm3399b"
+        default: "s905l3a"
         type: choice
         options:
           - sm3399b
+          - s905l3a
       armbian_kernel:
         description: "Select kernel version."
         required: false
@@ -166,14 +167,14 @@ jobs:
 
           mkdir -p /builder/build
           ln -sf /builder/build ${GITHUB_WORKSPACE}/build
-          ln -sf /builder/build /home/runner/work/_actions/RayPS/sm3399b-armbian/main/build
+          ln -sf /builder/build /home/runner/work/_actions/RayPS/amlogic-s9xxx-armbian/main/build
 
           sudo timedatectl set-timezone "${TZ}"
           echo "build_tag=Armbian${set_release}_${{ inputs.armbian_storage }}_$(date +"%Y.%m")" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Rebuild Armbian
-        uses: RayPS/sm3399b-armbian@main
+        uses: RayPS/amlogic-s9xxx-armbian@main
         if: ${{ env.ARMBIAN_URL }} != '' && !cancelled()
         with:
           build_target: armbian
